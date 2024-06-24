@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-diarmuidsheer-orderform-kxnelb93iua.ws-eu114.gitpod.io', 'https://order-forms-1ea078c2a2ee.herokuapp.com/']
+ALLOWED_HOSTS = ['8000-diarmuidsheer-orderform-kxnelb93iua.ws-eu114.gitpod.io', 'order-forms-1ea078c2a2ee.herokuapp.com']
 
 
 # Application definition
