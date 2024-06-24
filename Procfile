@@ -1,1 +1,1 @@
-web: gunicorn orderForm.wsgi
+web: gunicorn order.wsgi
