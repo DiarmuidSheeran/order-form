@@ -1,4 +1,13 @@
+/* Main Body Styling */
+
 body {
     background-color: black;
     color: white;
+}
+
+/* Nav Bar Styling */
+
+.logo {
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
