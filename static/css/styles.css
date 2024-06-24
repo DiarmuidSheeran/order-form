@@ -10,4 +10,28 @@ body {
 .logo {
     margin-top: 4px;
     margin-bottom: 4px;
+    width: 50%;
+    height: 50%;
+}
+
+/* Home Page Stylings */
+
+.crisp-logos {
+    height: 50vh;
+}
+
+.walkers-logo {
+
+}
+
+.tayto-logo {
+
+}
+
+.order-management {
+    border: white 2px solid;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-transform:uppercase ;
+    font-weight: 900;
 }

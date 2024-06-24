@@ -2,5 +2,24 @@
 {% load static %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<h1>Hello World</h1>
+
+<div class="container crisp-logos">
+    <div class="row justify-content-center ">
+        <a href="#" class="btn btn-primary btn-block order-management">Saved Orders  <i class="fa-solid fa-arrow-right fa-fade fa-lg" style="color: #ffffff;"></i></a>
+     </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <a href="#">
+                <img src="{{ 'https://res.cloudinary.com/drmbgol8n/image/upload/v1719244328/tayto-logo_xlilvg.jpg' }}" alt="Tayto Logo" class=" mt-4 img-fluid tayto-logo border border-light">
+            </a>
+        </div>
+        <div class="col-md-6 text-center ">
+            <a href="#">
+                <img src="{{ 'https://res.cloudinary.com/drmbgol8n/image/upload/v1719244284/walkers-logo_t6cen8.jpg' }}" alt="Tayto Logo" class="mt-4 walkers-logo img-fluid border border-light">
+            </a>
+        </div>
+    </div>
+    <hr>
+</div>
+
 {% endblock %}
