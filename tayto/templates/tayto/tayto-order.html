@@ -7,8 +7,31 @@
     <div class="row justify-content-center">
         <div class="col-md-6 text-center">
             <img src="{{ 'https://asset.brandfetch.io/idvmY8BeFn/idH3EjrqxE.png' }}" alt="Tayto Logo" class=" mt-4 img-fluid tayto-logo">
+    <table class="table table-bordered table-responsive text-light mt-4">
+        <thead>
+            <tr>
+                <th>Qty</th>
+                <th>Name</th>
+                <th>Weight</th>
+                <th>Case Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.weight }}g</td>
+                <td>{{ product.caseCount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
         </div>
     </div>
 </div>
 
+<div class="container">
+    
+</div>
 {% endblock%}
