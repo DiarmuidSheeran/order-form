@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+def tayto(request):
+    """
+    Renders the index page.
+    """
+    return render(request, 'tayto/tayto-order.html')
