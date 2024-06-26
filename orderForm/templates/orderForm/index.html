@@ -19,19 +19,21 @@
             </a>
         </div>
     </div>
-    <hr>
+</div>
     <div class="container crisp-logos">
         <div class="row justify-content-center">
             <h1>All Orders</h1>
-            <ul>
+            <br>
+            <ul class="list-unstyled">
                 {% for order in orders %}
                 <li>
-                    <a href="{% url 'generate_pdf' order.id %}" class="btn btn-primary">Download PDF for Order {{ order.id }}</a>
+                    <a href="{% url 'generate_pdf' order.id %}" class="btn btn-primary">Download PDF for Tayto Order <br>{{ order.created_at }}</a>
                 </li>
+                <br>
                 {% endfor %}
             </ul>
         </div>
     </div>
-</div>
+
 
 {% endblock %}

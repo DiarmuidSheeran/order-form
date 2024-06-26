@@ -1,9 +1,11 @@
 # models.py
 from django.db import models
 from tayto.models import taytoProduct
+from django.utils import timezone
 
 class taytoOrder(models.Model):
     products = models.ManyToManyField(taytoProduct, through='OrderProduct', related_name='orders')
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"Order {self.pk}"

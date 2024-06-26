@@ -9,7 +9,7 @@ def index(request):
     Renders the index page.
     """
 
-    orders = taytoOrder.objects.all()
+    orders = taytoOrder.objects.all().order_by('-created_at')
     context = {
         'orders': orders,
     }
