@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<div class="container crisp-logos">
+    <div class="row justify-content-center">
+        <img src="{{ 'https://asset.brandfetch.io/idvmY8BeFn/idH3EjrqxE.png' }}" alt="Tayto Logo" class="img-fluid mb-2">
+        <a href="{% url 'tayto_saved_orders' %}" class="btn btn-primary btn-block order-management">Tayto Orders  <i class="fa-solid fa-arrow-right fa-fade fa-lg" style="color: #ffffff;"></i></a>
+    </div>
+</div>
+
+
+{% endblock %}

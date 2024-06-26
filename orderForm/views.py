@@ -8,12 +8,25 @@ def index(request):
     """
     Renders the index page.
     """
+    return render(request, 'orderForm/index.html')
+
+def savedOrders(request):
+    """
+    Renders the index page.
+    """
+
+    return render(request, 'orderForm/saved_orders.html')
+
+def taytoSavedOrders(request):
+    """
+    Renders the index page.
+    """
 
     orders = taytoOrder.objects.all().order_by('-created_at')
     context = {
         'orders': orders,
     }
-    return render(request, 'orderForm/index.html', context)
+    return render(request, 'orderForm/tayto_saved_orders.html', context)
 
 def generate_pdf(request, order_id):
     order = get_object_or_404(taytoOrder, id=order_id)
