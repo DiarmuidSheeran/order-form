@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from orderForm.models import taytoOrder, OrderProduct
 from tayto.models import taytoProduct
 
+
 def tayto(request):
     products = taytoProduct.objects.all()
 
@@ -28,3 +29,4 @@ def tayto(request):
     }
 
     return render(request, 'tayto/tayto-order.html', context)
+
