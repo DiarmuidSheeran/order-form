@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from weasyprint import HTML
 from .models import taytoOrder
@@ -37,3 +37,9 @@ def generate_pdf(request, order_id):
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="order_{order_id}.pdf"'
     return response
+
+def delete_order(request, order_id):
+    order = get_object_or_404(taytoOrder, id=order_id)
+    order.delete()
+    return redirect('tayto_saved_orders')
+

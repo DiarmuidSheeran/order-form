@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 {% block title %}Home{% endblock %}
 {% block content %}
 
@@ -22,7 +23,12 @@
                         {% for product in products %}
                         <tr>
                             <td>
-                                <input type="number" name="quantity_{{ product.pk }}" value="0" min="0" required>
+                                <select name="quantity_{{ product.pk }}" required>
+                                    <option value="0">0</option>
+                                    {% for i in 1|to:10 %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                    {% endfor %}
+                                </select>
                                 <input type="hidden" name="product_id_{{ product.pk }}" value="{{ product.pk }}">
                             </td>
                             <td>{{ product.name }}</td>
