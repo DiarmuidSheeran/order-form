@@ -1,27 +1,29 @@
 from django.shortcuts import render, redirect
-from orderForm.models import taytoOrder
+from orderForm.models import taytoOrder, OrderProduct
 from tayto.models import taytoProduct
-from orderForm.forms import taytoOrderForm
 
 def tayto(request):
     products = taytoProduct.objects.all()
 
     if request.method == 'POST':
-        form = taytoOrderForm(request.POST)
-        if form.is_valid():
-            order = form.save(commit=False)
-            order.save()  # Save the order first to get an ID
+        order = taytoOrder.objects.create()
 
-            # Associate selected products with the order
-            selected_products = form.cleaned_data['products']
-            order.products.set(selected_products)  # Set the many-to-many relation
+        for product in products:
+            product_id_field = f"product_id_{product.pk}"
+            quantity_field = f"quantity_{product.pk}"
 
-            return redirect('index')  # Redirect to 'index' upon successful submission
-    else:
-        form = taytoOrderForm()
+            if product_id_field in request.POST and quantity_field in request.POST:
+                try:
+                    quantity = int(request.POST[quantity_field])
+                    if quantity > 0:
+                        product_instance = taytoProduct.objects.get(pk=request.POST[product_id_field])
+                        OrderProduct.objects.create(order=order, product=product_instance, quantity=quantity)
+                except ValueError:
+                    continue
+
+        return redirect('index')
 
     context = {
-        'form': form,
         'products': products,
     }
 
