@@ -44,7 +44,17 @@
                     </thead>
                     <tbody>
                         {% for product in products %}
-                        <tr>
+                        {% if product.category.name == "Impulse" %}
+                            <tr class="bg-danger text-light">
+                        {% elif product.category.name == "Sharing" %}
+                            <tr class="bg-success text-light">
+                        {% elif product.category.name == "Nuts/Snacks" %}
+                            <tr class="bg-primary text-light">
+                        {% elif product.category.name == "Multi-Pack" %}
+                            <tr class="bg-info text-light">
+                        {% else %}
+                            <tr>
+                        {% endif %}
                             <td>
                                 <select name="quantity_{{ product.pk }}" required>
                                     <option value="0">0</option>
@@ -55,12 +65,12 @@
                                 <input type="hidden" name="product_id_{{ product.pk }}" value="{{ product.pk }}">
                             </td>
                             <td>
-                                <a href="#details{{ forloop.counter }}" data-toggle="collapse" class="text-decoration-none text-dark">{{ product.name }}</a>
+                                <a href="#details{{ forloop.counter }}" data-toggle="collapse" class="text-decoration-none text-light"><strong>{{ product.name }}</strong></a>
                                 <div id="details{{ forloop.counter }}" class="collapse">
                                     <ul class="list-unstyled">
-                                        <li><strong>Product Code:</strong><br>{{ product.productCode }}</li>
-                                        <li><strong>Barcode:</strong> <br>{{ product.barcode }}</li>
-                                        <li><strong>Category: </strong> <br>{{ product.category }}</li>
+                                        <li><strong class="text-dark">Product Code:</strong><br>{{ product.productCode }}</li>
+                                        <li><strong class="text-dark">Barcode:</strong> <br>{{ product.barcode }}</li>
+                                        <li><strong class="text-dark">Category: </strong> <br>{{ product.category }}</li>
                                     </ul>
                                 </div>
                             </td>
@@ -71,6 +81,8 @@
                     </tbody>
                 </table>
                 <button type="submit" class="btn btn-primary btn-block">Submit Order</button>
+                <hr>
+                <hr>
             </form>
         </div>
     </div>
