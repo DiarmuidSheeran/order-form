@@ -32,6 +32,12 @@
                 {% endfor %}
             </form>
 
+            <div class="btn-group mb-4" role="group">
+                {% for category in categories %}
+                    <button type="button" class="btn btn-secondary" onclick="scrollToCategory('{{ category.id }}')">{{ category.name }}</button>
+                {% endfor %}
+            </div>
+
             <div class="row">
                 <div class="col-6">
                     <p class="text-danger"><strong class="text-light">Impulse: </strong>------</p>
@@ -63,39 +69,44 @@
                     </thead>
                     <tbody>
                         {% for product in products %}
-                        {% if product.category.name == "Impulse" %}
-                            <tr class="bg-danger text-light">
-                        {% elif product.category.name == "Sharing" %}
-                            <tr class="bg-success text-light">
-                        {% elif product.category.name == "Nuts/Snacks" %}
-                            <tr class="bg-primary text-light">
-                        {% elif product.category.name == "Multi-Pack" %}
-                            <tr class="bg-info text-light">
-                        {% else %}
-                            <tr>
-                        {% endif %}
-                            <td>
-                                <select name="quantity_{{ product.pk }}" required>
-                                    <option value="0">0</option>
-                                    {% for i in 1|to:10 %}
-                                    <option value="{{ i }}" {% if quantities|get_item:product.pk|stringformat:"s" == i|stringformat:"s" %}selected{% endif %}>{{ i }}</option>
-                                    {% endfor %}
-                                </select>
-                                <input type="hidden" name="product_id_{{ product.pk }}" value="{{ product.pk }}">
-                            </td>
-                            <td>
-                                <a href="#details{{ forloop.counter }}" data-toggle="collapse" class="text-decoration-none text-light"><strong>{{ product.name }}</strong></a>
-                                <div id="details{{ forloop.counter }}" class="collapse">
-                                    <ul class="list-unstyled">
-                                        <li><strong class="text-dark">Product Code:</strong><br>{{ product.productCode }}</li>
-                                        <li><strong class="text-dark">Barcode:</strong> <br>{{ product.barcode }}</li>
-                                        <li><strong class="text-dark">Category: </strong> <br>{{ product.category }}</li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td>{{ product.weight }}g</td>
-                            <td>{{ product.caseCount }}</td>
-                        </tr>
+                            {% if forloop.first or not forloop.previousitem.category.id == product.category.id %}
+                                <tr id="category{{ product.category.id }}">
+                            {% else %}
+                                <tr>
+                            {% endif %}
+                            {% if product.category.name == "Impulse" %}
+                                <tr class="bg-danger text-light">
+                            {% elif product.category.name == "Sharing" %}
+                                <tr class="bg-success text-light">
+                            {% elif product.category.name == "Nuts/Snacks" %}
+                                <tr class="bg-primary text-light">
+                            {% elif product.category.name == "Multi-Pack" %}
+                                <tr class="bg-info text-light">
+                            {% else %}
+                                <tr>
+                            {% endif %}
+                                <td>
+                                    <select name="quantity_{{ product.pk }}" required>
+                                        <option value="0">0</option>
+                                        {% for i in 1|to:10 %}
+                                        <option value="{{ i }}" {% if quantities|get_item:product.pk|stringformat:"s" == i|stringformat:"s" %}selected{% endif %}>{{ i }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <input type="hidden" name="product_id_{{ product.pk }}" value="{{ product.pk }}">
+                                </td>
+                                <td>
+                                    <a href="#details{{ forloop.counter }}" data-toggle="collapse" class="text-decoration-none text-light"><strong>{{ product.name }}</strong></a>
+                                    <div id="details{{ forloop.counter }}" class="collapse">
+                                        <ul class="list-unstyled">
+                                            <li><strong class="text-dark">Product Code:</strong><br>{{ product.productCode }}</li>
+                                            <li><strong class="text-dark">Barcode:</strong> <br>{{ product.barcode }}</li>
+                                            <li><strong class="text-dark">Category: </strong> <br>{{ product.category }}</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>{{ product.weight }}g</td>
+                                <td>{{ product.caseCount }}</td>
+                            </tr>
                         {% endfor %}
                     </tbody>
                 </table>
@@ -110,4 +121,14 @@
 <div class="container">
     
 </div>
+
+<script>
+    function scrollToCategory(categoryId) {
+        var element = document.getElementById('category' + categoryId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+</script>
+
 {% endblock %}
