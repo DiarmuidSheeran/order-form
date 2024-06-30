@@ -32,10 +32,12 @@
                 {% endfor %}
             </form>
 
-            <div class="btn-group mb-4" role="group">
-                {% for category in categories %}
-                    <button type="button" class="btn btn-secondary" onclick="scrollToCategory('{{ category.id }}')">{{ category.name }}</button>
-                {% endfor %}
+            <div class="sticky-top">
+                <div class="btn-group mb-4" role="group">
+                    {% for category in categories %}
+                        <button type="button" class="btn btn-secondary" onclick="scrollToCategory('{{ category.id }}')">{{ category.name }}</button>
+                    {% endfor %}
+                </div>
             </div>
 
             <div class="row">
