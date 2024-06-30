@@ -112,7 +112,7 @@
                         {% endfor %}
                     </tbody>
                 </table>
-                <button type="submit" class="btn btn-primary btn-block">Submit Order</button>
+                <button type="submit" class="btn btn-warning btn-block"><strong>Submit Order</strong></button>
                 <hr>
                 <hr>
             </form>
@@ -120,8 +120,8 @@
     </div>
 </div>
 
-<div class="container">
-    
+<div id="scrollToTopButton" class="scroll-to-top">
+    <i class="fas fa-chevron-up"></i>
 </div>
 
 <script>
@@ -131,6 +131,19 @@
             element.scrollIntoView({ behavior: 'smooth' });
         }
     }
+    window.onscroll = function() {
+        var scrollToTopButton = document.getElementById('scrollToTopButton');
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            scrollToTopButton.style.display = 'block';
+        } else {
+            scrollToTopButton.style.display = 'none';
+        }
+    };
+
+    // Scroll to the top of the page when the button is clicked
+    document.getElementById('scrollToTopButton').onclick = function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 </script>
 
 {% endblock %}
