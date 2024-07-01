@@ -7,35 +7,11 @@
 <div class="container crisp-logos">
     <div class="row justify-content-center">
         <div class="col-md-6 text-center">
-            <img src="{{ 'https://asset.brandfetch.io/idvmY8BeFn/idH3EjrqxE.png' }}" alt="Tayto Logo" class="mt-4 img-fluid tayto-logo">
-            <form method="get" class="mb-4">
-                <div class="form-group">
-                    <label for="category">Filter by Category:</label>
-                    <select name="category" id="category" class="form-control" onchange="this.form.submit()">
-                        <option value="">All Categories</option>
-                        {% for category in categories %}
-                            <option value="{{ category.id }}" {% if category.id|stringformat:"s" == selected_category %}selected{% endif %}>{{ category.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="sort_by">Sort by:</label>
-                    <select name="sort_by" id="sort_by" class="form-control" onchange="this.form.submit()">
-                        <option value="category" {% if sort_by == 'category' %}selected{% endif %}>Category</option>
-                        <option value="name" {% if sort_by == 'name' %}selected{% endif %}>Name</option>
-                        <option value="weight" {% if sort_by == 'weight' %}selected{% endif %}>Weight</option>
-                    </select>
-                </div>
-                <!-- Preserve quantities in GET parameters for all products -->
-                {% for product_id, quantity in quantities.items %}
-                    <input type="hidden" name="quantity_{{ product_id }}" value="{{ quantity }}">
-                {% endfor %}
-            </form>
-
+            <img src="{{ 'https://asset.brandfetch.io/idvmY8BeFn/idH3EjrqxE.png' }}" alt="Tayto Logo" class="mt-4 mb-3 img-fluid tayto-logo">
             <div class="sticky-top">
                 <div class="btn-group mb-4" role="group">
                     {% for category in categories %}
-                        <button type="button" class="btn btn-secondary" onclick="scrollToCategory('{{ category.id }}')">{{ category.name }}</button>
+                        <button type="button" class="btn btn-light" onclick="scrollToCategory('{{ category.id }}')">{{ category.name }}</button>
                     {% endfor %}
                 </div>
             </div>
