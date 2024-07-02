@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<div class="container crisp-logos">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <img src="{{ 'https://res.cloudinary.com/drmbgol8n/image/upload/v1719244284/walkers-logo_t6cen8.jpg' }}" alt="Tayto Logo" class="mt-4 mb-3 img-fluid tayto-logo">
+            <div class="sticky-top">
+                <div class="btn-group mb-4" role="group">
+                    {% for category in categories %}
+                        <button type="button" class="btn btn-light" onclick="scrollToCategory('{{ category.id }}')">{{ category.name }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <p class="text-danger"><strong class="text-light">Impulse: </strong>------</p>
+                </div>
+                <div class="col-6">
+                    <p class="text-info"><strong class="text-light">Multi-Pack: </strong>------</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <p class="text-success"><strong class="text-light">Sharing: </strong>------</p>
+                </div>
+                <div class="col-6">
+                    <p class="text-primary"><strong class="text-light">Nuts/Snacks: </strong>------</p>
+                </div>
+            </div>
+            
+            <form method="post">
+                {% csrf_token %}
+                <table class="table table-bordered table-responsive bg-light text-dark mt-4">
+                    <thead>
+                        <tr>
+                            <th>Qty</th>
+                            <th>Name</th>
+                            <th>Weight</th>
+                            <th>Case</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                            {% if forloop.first or not forloop.previousitem.category.id == product.category.id %}
+                                <tr id="category{{ product.category.id }}">
+                            {% else %}
+                                <tr>
+                            {% endif %}
+                            {% if product.category.name == "Impulse" %}
+                                <tr class="bg-danger text-light">
+                            {% elif product.category.name == "Sharing" %}
+                                <tr class="bg-success text-light">
+                            {% elif product.category.name == "Snacks/Nuts" %}
+                                <tr class="bg-primary text-light">
+                            {% elif product.category.name == "Multi-Pack" %}
+                                <tr class="bg-info text-light">
+                            {% else %}
+                                <tr>
+                            {% endif %}
+                                <td>
+                                    <select name="quantity_{{ product.pk }}" required>
+                                        <option value="0">0</option>
+                                        {% for i in 1|to:10 %}
+                                        <option value="{{ i }}" {% if quantities|get_item:product.pk|stringformat:"s" == i|stringformat:"s" %}selected{% endif %}>{{ i }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <input type="hidden" name="product_id_{{ product.pk }}" value="{{ product.pk }}">
+                                </td>
+                                <td>
+                                    <a href="#details{{ forloop.counter }}" data-toggle="collapse" class="text-decoration-none text-light"><strong>{{ product.name }}</strong></a>
+                                    <div id="details{{ forloop.counter }}" class="collapse">
+                                        <ul class="list-unstyled">
+                                            <li><strong class="text-dark">Product Code:</strong><br>{{ product.productCode }}</li>
+                                            <li><strong class="text-dark">Barcode:</strong> <br>{{ product.barcode }}</li>
+                                            <li><strong class="text-dark">Category: </strong> <br>{{ product.category }}</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>{{ product.weight }}g</td>
+                                <td>{{ product.caseCount }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-warning btn-block"><strong>Submit Order</strong></button>
+                <hr>
+                <hr>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="scrollToTopButton" class="scroll-to-top">
+    <i class="fas fa-chevron-up"></i>
+</div>
+
+<script>
+    function scrollToCategory(categoryId) {
+        var element = document.getElementById('category' + categoryId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+    window.onscroll = function() {
+        var scrollToTopButton = document.getElementById('scrollToTopButton');
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            scrollToTopButton.style.display = 'block';
+        } else {
+            scrollToTopButton.style.display = 'none';
+        }
+    };
+
+    // Scroll to the top of the page when the button is clicked
+    document.getElementById('scrollToTopButton').onclick = function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+</script>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<div class="container crisp-logos">
+    <div class="row justify-content-center mb-2">
+        <h1>Walkers Orders</h1>
+    </div>
+    <div class="row justify-content-center">
+        <ul class="list-unstyled">
+            {% for order in orders %}
+            <li>
+                <a href="{% url 'walkers_generate_pdf' order.id %}" class="btn btn-primary btn-block">Download PDF <i class="fa-solid fa-file-arrow-down fa-beat-fade" style="color: #ffffff;"></i></a>
+                Created: {{ order.created_at }}
+                <div>
+                    <form method="post" action="{% url 'walkers_delete_order' order.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </li>
+            <br>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+{% endblock %}

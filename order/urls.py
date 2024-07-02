@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('orderForm.urls')),
     path('tayto/', include('tayto.urls')),
+    path('walkers/', include('walkers.urls')),
 ]
