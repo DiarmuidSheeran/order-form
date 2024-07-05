@@ -30,6 +30,15 @@ def user_login(request):
     return render(request, 'orderForm/login.html')
 
 @login_required(login_url='login')
+def logoutUser(request):
+    """
+    Redirects user to landing page
+    """
+    logout(request)
+    return redirect('login')
+
+
+@login_required(login_url='login')
 def index(request):
     return render(request, 'orderForm/index.html')
 

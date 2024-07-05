@@ -5,7 +5,15 @@
 
 <div class="container crisp-logos">
     <div class="row justify-content-center ">
-        <a href="{% url 'saved_orders' %}" class="btn btn-primary btn-block order-management">Saved Orders  <i class="fa-solid fa-arrow-right fa-fade fa-lg" style="color: #ffffff;"></i></a>
+        <div class="col-md-6 text-center">
+            <a href="{% url 'logout' %}" class="btn btn-danger mb-4">
+            Logout
+            </a>
+        </div>
+    </div>
+   
+    <div class="row justify-content-center ">
+        <a href="{% url 'saved_orders' %}" class="btn btn-primary order-management">Saved Orders  <i class="fa-solid fa-arrow-right fa-fade fa-lg" style="color: #ffffff;"></i></a>
      </div>
     <div class="row justify-content-center">
         <div class="col-md-6 text-center">
