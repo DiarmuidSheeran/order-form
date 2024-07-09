@@ -24,4 +24,5 @@ urlpatterns = [
     path('', include('orderForm.urls')),
     path('tayto/', include('tayto.urls')),
     path('walkers/', include('walkers.urls')),
+    path('stafford/', include('stafford.urls')),
 ]

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'orderForm',
     'tayto',
     'walkers',
+    'stafford',
 ]
 
 MIDDLEWARE = [
