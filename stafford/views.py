@@ -7,7 +7,12 @@ from .models import staffordProduct
 
 # Create your views here.
 def stafford(request):
-    return render(request, 'stafford/stafford-order.html')
+    products = staffordProduct.objects.all()
+
+    context = {
+        'products': products,
+    }
+    return render(request, 'stafford/stafford-order.html', context)
 
 def upload_file(request):
     if request.method == 'POST':

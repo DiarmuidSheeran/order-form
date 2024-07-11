@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<div class="container crisp-logos">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <img src="{{ 'https://asset.brandfetch.io/idTb8IQVqQ/id0mI0KODd.png' }}" alt="Stafford Lynch Logo" class="mt-4 mb-3 img-fluid tayto-logo">
+            
+                <table class="table table-bordered table-responsive bg-light text-dark mt-4">
+                    <thead>
+                        <tr>
+                            <th>Qty</th>
+                            <th>Name</th>
+                            <th>Weight</th>
+                            <th>Case</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for product in products %}
+                                {% if product.quantity == None %}
+                                    <td>0</td>
+                                {% else %}
+                                    <td>{{ product.quantity }}</td>
+                                {% endif %}
+                                <td>
+                                    <a href="#details{{ forloop.counter }}" data-toggle="collapse" class="text-decoration-none text-dark"><strong>{{ product.name }}</strong></a>
+                                    <div id="details{{ forloop.counter }}" class="collapse">
+                                        <ul class="list-unstyled">
+                                            <li><strong class="text-dark">Product Code:</strong><br>{{ product.productCode }}</li>
+                                            <li><strong class="text-dark">Barcode:</strong> <br>{{ product.barcode }}</li>
+                                            <li><strong class="text-dark">Category: </strong> <br>{{ product.category }}</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>{{ product.weight }}g</td>
+                                <td>{{ product.caseCount }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        
+                <hr>
+                <hr>
+        </div>
+    </div>
+</div>
+
+<div id="scrollToTopButton" class="scroll-to-top">
+    <i class="fas fa-chevron-up"></i>
+</div>
+
+<script>
+    function scrollToCategory(categoryId) {
+        var element = document.getElementById('category' + categoryId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+    window.onscroll = function() {
+        var scrollToTopButton = document.getElementById('scrollToTopButton');
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            scrollToTopButton.style.display = 'block';
+        } else {
+            scrollToTopButton.style.display = 'none';
+        }
+    };
+
+    // Scroll to the top of the page when the button is clicked
+    document.getElementById('scrollToTopButton').onclick = function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+</script>
+
+{% endblock %}
+
