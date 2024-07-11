@@ -6,45 +6,45 @@
 
 <div class="container crisp-logos">
     <div class="row justify-content-center">
-        <div class="col-md-6 text-center">
+        <div class="col-md-12 text-center">
             <img src="{{ 'https://asset.brandfetch.io/idTb8IQVqQ/id0mI0KODd.png' }}" alt="Stafford Lynch Logo" class="mt-4 mb-3 img-fluid tayto-logo">
             
-                <table class="table table-bordered table-responsive bg-light text-dark mt-4">
-                    <thead>
+            <table class="table table-bordered bg-light text-dark mt-4 w-100">
+                <thead>
+                    <tr>
+                        <th>Qty</th>
+                        <th>Name</th>
+                        <th>Weight</th>
+                        <th>Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
                         <tr>
-                            <th>Qty</th>
-                            <th>Name</th>
-                            <th>Weight</th>
-                            <th>Case</th>
+                            {% if product.quantity == None %}
+                                <td>0</td>
+                            {% else %}
+                                <td>{{ product.quantity }}</td>
+                            {% endif %}
+                            <td>
+                                <a href="#details{{ forloop.counter }}" data-toggle="collapse" class="text-decoration-none text-dark"><strong>{{ product.name }}</strong></a>
+                                <div id="details{{ forloop.counter }}" class="collapse">
+                                    <ul class="list-unstyled">
+                                        <li><strong class="text-dark">Product Code:</strong><br>{{ product.productCode }}</li>
+                                        <li><strong class="text-dark">Barcode:</strong> <br>{{ product.barcode }}</li>
+                                        <li><strong class="text-dark">Category: </strong> <br>{{ product.category }}</li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td>{{ product.weight }}g</td>
+                            <td>{{ product.caseCount }}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            {% for product in products %}
-                                {% if product.quantity == None %}
-                                    <td>0</td>
-                                {% else %}
-                                    <td>{{ product.quantity }}</td>
-                                {% endif %}
-                                <td>
-                                    <a href="#details{{ forloop.counter }}" data-toggle="collapse" class="text-decoration-none text-dark"><strong>{{ product.name }}</strong></a>
-                                    <div id="details{{ forloop.counter }}" class="collapse">
-                                        <ul class="list-unstyled">
-                                            <li><strong class="text-dark">Product Code:</strong><br>{{ product.productCode }}</li>
-                                            <li><strong class="text-dark">Barcode:</strong> <br>{{ product.barcode }}</li>
-                                            <li><strong class="text-dark">Category: </strong> <br>{{ product.category }}</li>
-                                        </ul>
-                                    </div>
-                                </td>
-                                <td>{{ product.weight }}g</td>
-                                <td>{{ product.caseCount }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                    {% endfor %}
+                </tbody>
+            </table>
         
-                <hr>
-                <hr>
+            <hr>
+            <hr>
         </div>
     </div>
 </div>
@@ -76,4 +76,3 @@
 </script>
 
 {% endblock %}
-
