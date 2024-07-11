@@ -95,3 +95,6 @@ def walkers_delete_order(request, order_id):
     order = get_object_or_404(walkersOrder, id=order_id)
     order.delete()
     return redirect('walkers_saved_orders')
+
+def upload_products(request):
+    return render(request, 'orderForm/upload_products.html')

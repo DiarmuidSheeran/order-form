@@ -12,4 +12,5 @@ urlpatterns = [
     path('order/<int:order_id>/delete/', views.delete_order, name='delete_order'),
     path('walkers_order/<int:order_id>/pdf/', views.walkers_generate_pdf, name='walkers_generate_pdf'),
     path('walkers_order/<int:order_id>/delete/', views.walkers_delete_order, name='walkers_delete_order'),
+    path('upload_products', views.upload_products, name='upload_products'),
 ]
